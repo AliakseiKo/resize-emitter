@@ -9,7 +9,8 @@
     "emitter",
     "sensor",
     "emit",
-    "listener"
+    "listener",
+    "dimension"
   ],
   "author": {
     "name": "AliakseiKo",
