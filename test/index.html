@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #div {
+      display: inline-block;
+      background-color: orange;
+      min-height: 200px;
+      min-width: 50%;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="div" contenteditable>Hello World!</div><br>
+  <textarea id="textarea" style="resize: both;">Hello World!</textarea><br>
+  <progress id="progress">Hello World!</progress><br>
+
+  <script src="../lib/ResizeEmitter.js"></script>
+
+  <script>
+
+    const cb = function (event) {
+      console.log("resized", event.target);
+    };
+
+    ResizeEmitter.createResizeEmitter(div);
+    div.addEventListener('resize', cb);
+    ResizeEmitter.createResizeEmitter(textarea);
+    textarea.addEventListener('resize', cb);
+    ResizeEmitter.createResizeEmitter(progress);
+    progress.addEventListener('resize', cb);
+
+    setTimeout(function () {
+      document.body.appendChild(div);
+    }, 1000);
+
+  </script>
+</body>
+</html>

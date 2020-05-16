@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "name": "resize-emitter",
+  "version": "1.0.0",
+  "description": "Add resize event to any html element.",
+  "keywords": [
+    "resize",
+    "event",
+    "emitter",
+    "sensor",
+    "emit",
+    "listener"
+  ],
+  "author": {
+    "name": "AliakseiKo",
+    "email": "AliakseiKo@gmail.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/AliakseiKo/resize-emitter#readme",
+  "bugs": {
+    "url": "https://github.com/AliakseiKo/resize-emitter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AliakseiKo/resize-emitter.git"
+  },
+  "main": "lib/ResizeEmitter.js",
+  "files": ["lib/"],
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup": "^2.10.0",
+    "rollup-plugin-terser": "^5.3.0"
+  }
+}
