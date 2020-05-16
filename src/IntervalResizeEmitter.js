@@ -4,11 +4,10 @@ import {
   _dispatchEvent
 } from './wrappedFunctions';
 
-import { getSize, changedSize, isNode } from './utils';
+import { getSize, changedSize } from './utils';
 
 var IntervalResizeEmitter = {
-  createResizeEmitter: function createResizeEmitter(element) {
-    isNode(element);
+  add: function (element) {
     var sensor = {
       target: element,
       prevSize: getSize(element),
@@ -25,8 +24,7 @@ var IntervalResizeEmitter = {
     sensor.requestID = _requestAnimationFrame(loop);
   },
 
-  removeResizeEmitter: function removeResizeEmitter(element) {
-    isNode(element);
+  remove: function (element) {
     if (element.__resizeSensor__) {
       _cancelAnimationFrame(element.__resizeSensor__.requestID);
       delete element.__resizeSensor__;

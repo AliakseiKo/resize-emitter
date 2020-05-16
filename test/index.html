@@ -11,14 +11,30 @@
       min-height: 200px;
       min-width: 50%;
     }
+
+    .test {
+      width: 50%;
+      height: 100px;
+      margin: 5px;
+      background-color: green;
+    }
   </style>
 </head>
 <body>
 
-  <div id="div" contenteditable>Hello World!</div><br>
+  <!-- <div id="div" contenteditable>Hello World!</div><br>
   <textarea id="textarea" style="resize: both;">Hello World!</textarea><br>
-  <progress id="progress">Hello World!</progress><br>
+  <progress id="progress">Hello World!</progress><br> -->
 
+  <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="../lib/ResizeEmitter.js"></script>
 
   <script>
@@ -27,16 +43,26 @@
       console.log("resized", event.target);
     };
 
-    ResizeEmitter.createResizeEmitter(div);
-    div.addEventListener('resize', cb);
-    ResizeEmitter.createResizeEmitter(textarea);
-    textarea.addEventListener('resize', cb);
-    ResizeEmitter.createResizeEmitter(progress);
-    progress.addEventListener('resize', cb);
+    // ResizeEmitter.addResizeEmitter(div);
+    // div.addEventListener('resize', cb);
+    // ResizeEmitter.addResizeEmitter(textarea);
+    // textarea.addEventListener('resize', cb);
+    // ResizeEmitter.addResizeEmitter(progress);
+    // progress.addEventListener('resize', cb);
 
-    setTimeout(function () {
-      document.body.appendChild(div);
-    }, 1000);
+    // setTimeout(function () {
+    //   document.body.appendChild(div);
+    // }, 1000);
+
+    ResizeEmitter.addResizeEmitter($('.test'));
+
+    console.log($('.test'));
+    // console.log(document.querySelectorAll('.test'));
+    // console.log(document.getElementsByClassName('test'));
+
+    $('.test').on('resize', cb);
+
+
 
   </script>
 </body>

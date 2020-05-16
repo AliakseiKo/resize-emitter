@@ -4,7 +4,7 @@ import {
   _dispatchEvent
 } from './wrappedFunctions';
 
-import { getSize, changedSize, isNode } from './utils';
+import { getSize, changedSize } from './utils';
 
 function resizeHandler(entries) {
   for (var i = 0; i < entries.length; i++) {
@@ -23,8 +23,9 @@ function resizeHandler(entries) {
 }
 
 var ObserveResizeEmitter = {
-  createResizeEmitter: function createResizeEmitter(element) {
-    isNode(element);
+  add: function (element) {
+    if (element.__resizeSensor__) return;
+
     var observer = new ResizeObserver(resizeHandler);
     observer.observe(element);
 
@@ -36,12 +37,11 @@ var ObserveResizeEmitter = {
     };
   },
 
-  removeResizeEmitter: function removeResizeEmitter(element) {
-    isNode(element);
-    if (element.__resizeSensor__) {
-      element.__resizeSensor__.observer.disconnect();
-      delete element.__resizeSensor__;
-    }
+  remove: function (element) {
+    if (!element.__resizeSensor__) return;
+
+    element.__resizeSensor__.observer.disconnect();
+    delete element.__resizeSensor__;
   }
 };
 

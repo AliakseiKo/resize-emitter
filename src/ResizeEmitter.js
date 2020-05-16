@@ -24,24 +24,74 @@ function isIntervalTag(tagName) {
 var ResizeEmitter;
 
 if (typeof ResizeObserver === 'function') {
-  ResizeEmitter = ObserveResizeEmitter;
-} else {
   ResizeEmitter = {
-    createResizeEmitter: function createResizeEmitter(element) {
-      isNode(element);
-      if (isIntervalTag(element.tagName)) {
-        IntervalResizeEmitter.createResizeEmitter(element);
+    add: function (element) {
+      function add(element) {
+        isNode(element);
+        ObserveResizeEmitter.add(element);
+      }
+
+      if (typeof element.length === 'number') {
+        for (var i = 0; i < element.length; i++) {
+          add(element[i]);
+        }
       } else {
-        ScrollResizeEmitter.createResizeEmitter(element);
+        add(element);
       }
     },
 
-    removeResizeEmitter: function removeResizeEmitter(element) {
-      isNode(element);
-      if (isIntervalTag(element.tagName)) {
-        IntervalResizeEmitter.removeResizeEmitter(element);
+    remove: function (element) {
+      function remove(element) {
+        isNode(element);
+        ObserveResizeEmitter.remove(element);
+      }
+
+      if (typeof element.length === 'number') {
+        for (var i = 0; i < element.length; i++) {
+          remove(element[i]);
+        }
       } else {
-        ScrollResizeEmitter.removeResizeEmitter(element);
+        remove(element);
+      }
+    }
+  };
+} else {
+  ResizeEmitter = {
+    add: function (element) {
+      function add(element) {
+        isNode(element);
+        if (isIntervalTag(element.tagName)) {
+          IntervalResizeEmitter.add(element);
+        } else {
+          ScrollResizeEmitter.add(element);
+        }
+      }
+
+      if (typeof element.length === 'number') {
+        for (var i = 0; i < element.length; i++) {
+          add(element[i]);
+        }
+      } else {
+        add(element);
+      }
+    },
+
+    remove: function (element) {
+      function remove(element) {
+        isNode(element);
+        if (isIntervalTag(element.tagName)) {
+          IntervalResizeEmitter.remove(element);
+        } else {
+          ScrollResizeEmitter.remove(element);
+        }
+      }
+
+      if (typeof element.length === 'number') {
+        for (var i = 0; i < element.length; i++) {
+          remove(element[i]);
+        }
+      } else {
+        remove(element);
       }
     }
   };

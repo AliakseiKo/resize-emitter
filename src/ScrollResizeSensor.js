@@ -6,7 +6,7 @@ import {
   _stopImmediatePropagation
 } from './wrappedFunctions';
 
-import { getSize, changedSize, isNode } from './utils';
+import { getSize, changedSize } from './utils';
 
 var animationString;
 var animationstartEvent = 'animationstart';
@@ -111,8 +111,7 @@ function createSensor() {
 }
 
 var ScrollResizeEmitter = {
-  createResizeEmitter: function createResizeEmitter(element) {
-    isNode(element);
+  add: function (element) {
     if (element.__resizeSensor__) return;
 
     initKeyframes();
@@ -135,12 +134,11 @@ var ScrollResizeEmitter = {
     _addEventListener(sensorElement, animationstartEvent, animationListener, true);
   },
 
-  removeResizeEmitter: function removeResizeEmitter(element) {
-    isNode(element);
-    if (element.__resizeSensor__) {
-      element.removeChild(element.__resizeSensor__.element);
-      delete element.__resizeSensor__;
-    };
+  remove: function (element) {
+    if (!element.__resizeSensor__) return;
+
+    element.removeChild(element.__resizeSensor__.element);
+    delete element.__resizeSensor__;
   }
 };
 
