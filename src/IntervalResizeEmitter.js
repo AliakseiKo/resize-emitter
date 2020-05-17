@@ -1,7 +1,8 @@
 import {
   _requestAnimationFrame,
   _cancelAnimationFrame,
-  _dispatchEvent
+  _dispatchEvent,
+  _addEventListener
 } from './wrappedFunctions';
 
 import { getSize, changedSize } from './utils';
@@ -56,4 +57,4 @@ var IntervalResizeEmitter = {
   }
 };
 
-export { IntervalResizeEmitter };
+export default IntervalResizeEmitter;

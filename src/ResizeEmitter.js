@@ -1,6 +1,6 @@
-import { ObserveResizeEmitter } from './ObserverResizeSensor';
-import { ScrollResizeEmitter } from './ScrollResizeSensor';
-import { IntervalResizeEmitter } from './IntervalResizeEmitter';
+import ObserveResizeEmitter from './ObserverResizeEmitter';
+import ScrollResizeEmitter from './ScrollResizeEmitter';
+import IntervalResizeEmitter from './IntervalResizeEmitter';
 import { isNode } from './utils';
 
 function isIntervalTag(tagName) {
@@ -22,8 +22,8 @@ function isIntervalTag(tagName) {
 }
 
 var ResizeEmitter;
-
-if (typeof ResizeObserver === 'function') {
+// typeof ResizeObserver === 'function'
+if (false) {
   ResizeEmitter = {
     add: function (element) {
       function add(element) {

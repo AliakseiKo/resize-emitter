@@ -16,5 +16,29 @@ export default [
         plugins: [terser()]
       }
     ]
+  },
+  {
+    input: 'src/ScrollResizeEmitter.js',
+    output: {
+      file: 'test/ScrollResizeEmitter.js',
+      format: 'umd',
+      name: 'ScrollResizeEmitter'
+    }
+  },
+  {
+    input: 'src/IntervalResizeEmitter.js',
+    output: {
+      file: 'test/IntervalResizeEmitter.js',
+      format: 'umd',
+      name: 'IntervalResizeEmitter'
+    }
+  },
+  {
+    input: 'src/ObserverResizeEmitter.js',
+    output: {
+      file: 'test/ObserverResizeEmitter.js',
+      format: 'umd',
+      name: 'ObserverResizeEmitter'
+    }
   }
 ];

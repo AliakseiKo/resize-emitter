@@ -1,24 +1,32 @@
-var _requestAnimationFrame = requestAnimationFrame
-  || mozRequestAnimationFrame
-  || webkitRequestAnimationFrame
-  || function (cb) { return setTimeout(cb, 1000 / 60) };
+var _requestAnimationFrame = window.requestAnimationFrame
+  || window.mozRequestAnimationFrame
+  || window.webkitRequestAnimationFrame
+  || function (cb) { return window.setTimeout(cb, 1000 / 60) };
 
-var _cancelAnimationFrame = cancelAnimationFrame
-  || mozCancelAnimationFrame
-  || webkitCancelAnimationFrame
-  || clearTimeout;
+var _cancelAnimationFrame = window.cancelAnimationFrame
+  || window.mozCancelAnimationFrame
+  || window.webkitCancelAnimationFrame
+  || window.clearTimeout;
+
+var _createEvent = (function () {
+  try {
+    var _event = new Event('resize');
+
+    return function (type) {
+      return new Event(type);
+    }
+  } catch (e) {
+    return function (type) {
+      var event = document.createEvent('Event');
+      event.initEvent(type, false, false);
+      return event;
+    }
+  }
+})();
 
 var _dispatchEvent = (function () {
-  if (typeof Event === 'function') {
-    return function (element, type) {
-      element.dispatchEvent(new Event(type));
-    };
-  }
-
   return function (element, type) {
-    var event = document.createEvent('Event');
-    event.initEvent(type, false, false);
-    element.dispatchEvent(event);
+    element.dispatchEvent(_createEvent(type));
   }
 })();
 
@@ -35,12 +43,7 @@ var _addEventListener = (function () {
 })();
 
 var _stopImmediatePropagation = (function () {
-  var _event;
-  if (typeof Event === 'function') {
-    _event = new Event('resize');
-  } else {
-    _event = document.createEvent('Event');
-  }
+  var _event = _createEvent('resize');
 
   if (typeof _event.stopImmediatePropagation === 'function') {
     return function (event) {

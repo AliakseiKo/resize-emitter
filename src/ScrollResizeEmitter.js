@@ -8,12 +8,11 @@ import {
 
 import { getSize, changedSize } from './utils';
 
-var animationString;
 var animationstartEvent = 'animationstart';
-var keyframesInited = false;
+var isStyleInited = false;
 
-function initKeyframes() {
-  if (keyframesInited) return;
+function initStyle() {
+  if (isStyleInited) return;
 
   var keyframeprefix = '';
 
@@ -24,24 +23,30 @@ function initKeyframes() {
 
     for(var i = 0; i < domPrefixes.length; i++) {
       if(el.style[domPrefixes[i] + 'AnimationName'] === undefined) continue;
-
       keyframeprefix = '-' + domPrefixes[i] + '-';
-      animationstartevent = startEvents[i];
+      animationstartEvent = startEvents[i];
     }
   }
 
-  animationString = keyframeprefix + 'animation:1ms __ResizeSensorKF__;';
-  var css = '@' + keyframeprefix + 'keyframes __ResizeSensorKF__{from{opacity:0}to{opacity:0}}';
+  var childStyle = 'position:absolute;left:0;top:0;';
+  var parentStyle = childStyle + 'right:0;bottom:0;z-index:-1;overflow:hidden;visibility:hidden;opacity:0;pointer-events:none;';
+  var shrinkChildStyle = 'width:200%;height:200%;';
 
-  var style = document.createElement('style');
-  style.type = 'text/css';
+  var css = '@' + keyframeprefix + 'keyframes __ResizeSensorKF__{from{opacity:0}to{opacity:0}}' +
+    '.__ResizeSensor__{' + keyframeprefix + 'animation:1ms __ResizeSensorKF__;}' +
+    '.__ResizeSensor__,.__ResizeExpand__,.__ResizeShrink__{' + parentStyle + '}' +
+    '.__ResizeExpandChild__,.__ResizeShrinkChild__{' + childStyle + '}' +
+    '.__ResizeShrinkChild__{' + shrinkChildStyle + '}';
 
-  if (style.styleSheet) style.styleSheet.cssText = css;
-  else style.appendChild(document.createTextNode(css));
+  var styleEl = document.createElement('style');
+  styleEl.type = 'text/css';
 
-  document.head.appendChild(style);
+  if (styleEl.styleSheet) styleEl.styleSheet.cssText = css;
+  else styleEl.appendChild(document.createTextNode(css));
 
-  keyframesInited = true;
+  document.head.appendChild(styleEl);
+
+  isStyleInited = true;
 }
 
 function scrollListener(event) {
@@ -83,28 +88,24 @@ function resetSensor(sensorElement) {
 };
 
 function createSensor() {
-  var style = 'position:absolute;left:0;top:0;right:0;bottom:0;z-index:-1;overflow:hidden;visibility:hidden;opacity:0;pointer-events:none;';
-  var childStyle = 'position:absolute;left:0;top:0;';
-
   var sensorElement = document.createElement('div');
   sensorElement.classList.add('__ResizeSensor__');
   sensorElement.dir = 'ltr';
-  sensorElement.style.cssText = style + animationString;
 
   var expand = document.createElement('div');
-  expand.style.cssText = style;
+  expand.classList.add('__ResizeExpand__');
   sensorElement.appendChild(expand);
 
   var expandChild = document.createElement('div');
-  expandChild.style.cssText = childStyle;
+  expandChild.classList.add('__ResizeExpandChild__');
   expand.appendChild(expandChild);
 
   var shrink = document.createElement('div');
-  shrink.style.cssText = style;
+  shrink.classList.add('__ResizeShrink__');
   sensorElement.appendChild(shrink);
 
   var shrinkChild = document.createElement('div');
-  shrinkChild.style.cssText = childStyle + 'width:200%;height:200%;';
+  shrinkChild.classList.add('__ResizeShrinkChild__');
   shrink.appendChild(shrinkChild);
 
   return sensorElement;
@@ -114,7 +115,7 @@ var ScrollResizeEmitter = {
   add: function (element) {
     if (element.__resizeSensor__) return;
 
-    initKeyframes();
+    initStyle();
 
     if (getComputedStyle(element).position === 'static') element.style.position = 'relative';
 
@@ -142,4 +143,4 @@ var ScrollResizeEmitter = {
   }
 };
 
-export { ScrollResizeEmitter };
+export default ScrollResizeEmitter;

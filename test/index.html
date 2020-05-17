@@ -12,6 +12,13 @@
       min-width: 50%;
     }
 
+    #div2 {
+      display: inline-block;
+      background-color: green;
+      height: 50px;
+      width: 50px;
+    }
+
     .test {
       width: 50%;
       height: 100px;
@@ -22,47 +29,44 @@
 </head>
 <body>
 
-  <!-- <div id="div" contenteditable>Hello World!</div><br>
+  <div id="div" contenteditable>Hello World! <div id="div2"></div></div><br>
   <textarea id="textarea" style="resize: both;">Hello World!</textarea><br>
-  <progress id="progress">Hello World!</progress><br> -->
 
-  <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div>
+  <input id="out" type="text">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div>
+  <div class="test"></div> -->
+
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
   <script src="../lib/ResizeEmitter.js"></script>
 
   <script>
 
-    const cb = function (event) {
+    var cb = function (event) {
+      out.value = Number(out.value) + 1;
       console.log("resized", event.target);
     };
 
-    // ResizeEmitter.addResizeEmitter(div);
-    // div.addEventListener('resize', cb);
-    // ResizeEmitter.addResizeEmitter(textarea);
-    // textarea.addEventListener('resize', cb);
-    // ResizeEmitter.addResizeEmitter(progress);
-    // progress.addEventListener('resize', cb);
+    ResizeEmitter.add(div);
+    div.addEventListener('resize', cb);
+    ResizeEmitter.add(textarea);
+    textarea.addEventListener('resize', cb);
 
-    // setTimeout(function () {
-    //   document.body.appendChild(div);
-    // }, 1000);
+    setTimeout(function () {
+      document.body.appendChild(div);
+    }, 1000);
 
-    ResizeEmitter.addResizeEmitter($('.test'));
+    // ResizeEmitter.add($('.test'));
+    // ResizeEmitter.add(document.querySelectorAll('.test'));
+    // ResizeEmitter.add(document.getElementsByClassName('test'));
 
-    console.log($('.test'));
-    // console.log(document.querySelectorAll('.test'));
-    // console.log(document.getElementsByClassName('test'));
-
-    $('.test').on('resize', cb);
-
-
+    // $('.test').on('resize', cb);
 
   </script>
 </body>

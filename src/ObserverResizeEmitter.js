@@ -1,7 +1,8 @@
 import {
   _requestAnimationFrame,
   _cancelAnimationFrame,
-  _dispatchEvent
+  _dispatchEvent,
+  _addEventListener
 } from './wrappedFunctions';
 
 import { getSize, changedSize } from './utils';
@@ -45,4 +46,4 @@ var ObserveResizeEmitter = {
   }
 };
 
-export { ObserveResizeEmitter };
+export default ObserveResizeEmitter;
