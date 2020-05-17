@@ -4,23 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <style>
-    .block {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin: 2px;
-      background-color: green;
-    }
-  </style>
 </head>
 <body>
   <script src="./ScrollResizeEmitter.js"></script>
 
   <script>
+    console.log('Memory Leak Test [Scroll]');
+
+    var stop = false;
 
     (function loop() {
-      setTimeout(loop);
+      if (!stop) setTimeout(loop);
 
       for (var i = 0; i < 1e3; i++) {
         ScrollResizeEmitter.add(document.createElement('div'));

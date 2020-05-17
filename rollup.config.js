@@ -26,6 +26,14 @@ export default [
     }
   },
   {
+    input: 'src/ObserverResizeEmitter.js',
+    output: {
+      file: 'test/ObserverResizeEmitter.js',
+      format: 'umd',
+      name: 'ObserverResizeEmitter'
+    }
+  },
+  {
     input: 'src/IntervalResizeEmitter.js',
     output: {
       file: 'test/IntervalResizeEmitter.js',
@@ -34,11 +42,11 @@ export default [
     }
   },
   {
-    input: 'src/ObserverResizeEmitter.js',
+    input: 'src/IntervalResizeEmitter2.js',
     output: {
-      file: 'test/ObserverResizeEmitter.js',
+      file: 'test/IntervalResizeEmitter2.js',
       format: 'umd',
-      name: 'ObserverResizeEmitter'
+      name: 'IntervalResizeEmitter2'
     }
   }
 ];

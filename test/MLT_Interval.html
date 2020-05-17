@@ -9,9 +9,12 @@
   <script src="./IntervalResizeEmitter.js"></script>
 
   <script>
+    console.log('Memory Leak Test [Interval]');
+
+    var stop = false;
 
     (function loop() {
-      setTimeout(loop);
+      if (!stop) setTimeout(loop);
 
       for (var i = 0; i < 1e3; i++) {
         IntervalResizeEmitter.add(document.createElement('div'));
