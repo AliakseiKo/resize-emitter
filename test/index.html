@@ -13,60 +13,64 @@
     }
 
     #div2 {
-      display: inline-block;
       background-color: green;
-      height: 50px;
-      width: 50px;
+      height: 200px;
+      width: 200px;
+      margin: 10px 0;
     }
 
-    .test {
-      width: 50%;
-      height: 100px;
-      margin: 5px;
-      background-color: green;
+    #out {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      font-weight: bold;
+      color: white;
+      background-color: black;
+      padding: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div id="div" contenteditable>Hello World! <div id="div2"></div></div><br>
-  <textarea id="textarea" style="resize: both;">Hello World!</textarea><br>
+  <div id="div" contenteditable>Hello World!</div>
 
-  <input id="out" type="text">
+  <hr>
 
+  <textarea id="textarea" style="resize: both;">Hello World!</textarea>
 
-  <!-- <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div>
-  <div class="test"></div> -->
+  <span id="out">resized: <label id="counter">0</label></span>
 
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+  <hr>
+
+  <label>
+    heigth: <input type="number" value="200" onchange="div2.style.height = this.value + 'px'">
+  </label>
+  <label>
+    width: <input type="number" value="200" onchange="div2.style.width = this.value + 'px'">
+  </label>
+  <div id="div2"></div>
+
+  <hr>
+
   <script src="../lib/ResizeEmitter.js"></script>
 
   <script>
 
     var cb = function (event) {
-      out.value = Number(out.value) + 1;
+      counter.innerText = Number(counter.innerText) + 1;
       console.log("resized", event.target);
     };
 
     ResizeEmitter.add(div);
     div.addEventListener('resize', cb);
+    ResizeEmitter.add(div2);
+    div2.addEventListener('resize', cb);
     ResizeEmitter.add(textarea);
     textarea.addEventListener('resize', cb);
 
     setTimeout(function () {
       document.body.appendChild(div);
-    }, 1000);
-
-    // ResizeEmitter.add($('.test'));
-    // ResizeEmitter.add(document.querySelectorAll('.test'));
-    // ResizeEmitter.add(document.getElementsByClassName('test'));
-
-    // $('.test').on('resize', cb);
+    }, 5000);
 
   </script>
 </body>
