@@ -18,12 +18,12 @@ function initStyle() {
 
   var el = document.createElement('fakeElement');
   if(el.style.animationName === undefined) {
-    var domPrefixes = ['webkit', 'moz', 'o', 'ms'];
+    var domPrefixes = ['Webkit', 'Moz', 'O', 'ms'];
     var startEvents = ['webkitAnimationStart', 'animationstart', 'oAnimationStart', 'MSAnimationStart'];
 
     for(var i = 0; i < domPrefixes.length; i++) {
       if(el.style[domPrefixes[i] + 'AnimationName'] === undefined) continue;
-      keyframeprefix = '-' + domPrefixes[i] + '-';
+      keyframeprefix = '-' + domPrefixes[i].toLowerCase() + '-';
       animationstartEvent = startEvents[i];
     }
   }

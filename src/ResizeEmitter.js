@@ -22,8 +22,8 @@ function isIntervalTag(tagName) {
 }
 
 var ResizeEmitter;
-// typeof ResizeObserver === 'function'
-if (false) {
+
+if (typeof ResizeObserver === 'function') {
   ResizeEmitter = {
     add: function (element) {
       function add(element) {
