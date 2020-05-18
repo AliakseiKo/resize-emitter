@@ -22,6 +22,11 @@ It was tested in:
 * Safari 5.1 (Jul 20, 2011)
 
 ## **Usage**
+You can get it using CDN:
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/AliakseiKo/resize-emitter@v1.0.2/lib/ResizeEmitter.min.js"></script>
+```
 
 jQuery:
 
