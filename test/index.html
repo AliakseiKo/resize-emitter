@@ -43,10 +43,10 @@
   <hr>
 
   <label>
-    heigth: <input type="number" value="200" onchange="div2.style.height = this.value + 'px'">
+    heigth: <input type="number" value="200" onchange="window.div2.style.height = this.value + 'px'">
   </label>
   <label>
-    width: <input type="number" value="200" onchange="div2.style.width = this.value + 'px'">
+    width: <input type="number" value="200" onchange="window.div2.style.width = this.value + 'px'">
   </label>
   <div id="div2"></div>
 
@@ -56,17 +56,34 @@
 
   <script>
 
+  var _addEventListener = (function () {
+    if (typeof document.addEventListener === 'function') {
+      return function (element, type, handler, capture) {
+        element.addEventListener(type, handler, capture);
+      }
+    }
+
+    return function (element, type, handler, capture) {
+      element.attachEvent('on' + type, handler);
+    }
+  })();
+
+    var div = document.getElementById('div');
+    var div2 = document.getElementById('div2');
+    var textarea = document.getElementById('textarea');
+    var counter = document.getElementById('counter');
+
     var cb = function (event) {
-      counter.innerText = Number(counter.innerText) + 1;
+      counter.textContent = Number(counter.textContent) + 1;
       console.log("resized", event.target.id, event.target);
     };
 
     ResizeEmitter.add(div);
-    div.addEventListener('resize', cb);
+    div.addEventListener('resize', cb, false);
     ResizeEmitter.add(div2);
-    div2.addEventListener('resize', cb);
+    div2.addEventListener('resize', cb, false);
     ResizeEmitter.add(textarea);
-    textarea.addEventListener('resize', cb);
+    textarea.addEventListener('resize', cb, false);
 
     setTimeout(function () {
       document.body.appendChild(div);
