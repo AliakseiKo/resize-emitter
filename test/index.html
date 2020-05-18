@@ -58,7 +58,7 @@
 
     var cb = function (event) {
       counter.innerText = Number(counter.innerText) + 1;
-      console.log("resized", event.target);
+      console.log("resized", event.target.id, event.target);
     };
 
     ResizeEmitter.add(div);
