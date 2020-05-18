@@ -1,6 +1,6 @@
 # resize-emitter
 
-Add resize event to any html element. You can subscribe to the resize event like to any other standard event.
+Add resize event to any html element. You can subscribe to the resize event like to any other standard event. **5.01KB** when compressed.
 
 I tried to make to it works in older versions of browsers.
 It was tested in:
