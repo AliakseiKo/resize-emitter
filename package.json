@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "resize-emitter",
   "version": "1.0.0",
   "description": "Add resize event to any html element.",
@@ -10,7 +9,8 @@
     "sensor",
     "emit",
     "listener",
-    "dimension"
+    "dimension",
+    "change"
   ],
   "author": {
     "name": "AliakseiKo",
@@ -25,7 +25,8 @@
     "type": "git",
     "url": "git+https://github.com/AliakseiKo/resize-emitter.git"
   },
-  "main": "lib/ResizeEmitter.js",
+  "main": "lib/ResizeEmitter.min.js",
+  "browser": "lib/ResizeEmitter.min.js",
   "files": ["lib/"],
   "scripts": {
     "build": "rollup -c"
